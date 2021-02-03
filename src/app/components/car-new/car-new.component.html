@@ -1,0 +1,66 @@
+<div class="col-lg-4 col-md-10 col-xs-12" *ngIf="car">
+    <h2>{{pageTitle}}</h2>
+    <div class="alert alert-success" *ngIf="statusCar == 'success'">
+        El registro del vehículo se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="statusCar == 'error'">
+        El registro del vehículo no se ha completado correctamente
+    </div>
+    <form #CarNew="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="marca">Marca</label>
+            <input type="text" class="form-control" id="marca" name="marca" #marca="ngModel" [(ngModel)]="car.marca" required>
+            <span *ngIf="!marca.valid && marca.touched">La marca es obligatoria</span>
+        </div>
+        <div class="form-group">
+            <label for="title">Modelo</label>
+            <input type="text" class="form-control" id="title" name="title" #title="ngModel" [(ngModel)]="car.title" required>
+            <span *ngIf="!title.valid && title.touched">El modelo es obligatorio</span>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea class="form-control" id="description" name="description" #description="ngModel" [(ngModel)]="car.description" required></textarea>
+            <span *ngIf="!description.valid && description.touched">La descripción es obligatoria</span>
+        </div>
+        <div class="form-group">
+            <label for="image">Imagen</label>
+            <input type="file" class="form-control" id="image" name="image" (change)="fileChangeEvent($event.target.files)">
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input type="number" class="form-control" id="price" name="price" #price="ngModel" [(ngModel)]="car.price" required>
+            <span *ngIf="!price.valid && price.touched">El precio es obligatorio</span>
+        </div>
+        <div class="form-group">
+            <label for="caballos">Caballos</label>
+            <input type="number" class="form-control" id="caballos" name="caballos" #caballos="ngModel" [(ngModel)]="car.caballos" required>
+            <span *ngIf="!caballos.valid && caballos.touched">Los caballos (CV) son obligatorios</span>
+        </div>
+        <div class="form-group">
+            <label for="cambio">Tipo de cambio</label>
+            <select class="form-control" name="cambio" #cambio="ngModel" [(ngModel)]="car.cambio" required>
+                <option value="Manual" selected="selected">Manual</option>
+                <option value="Automático">Automático</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="motor">Tipo de motor</label>
+            <select class="form-control" name="motor" #motor="ngModel" [(ngModel)]="car.motor" required>
+                <option value="Diesel" selected="selected">Diesel</option>
+                <option value="Gasolina">Gasolina</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">¿A la venta?</label>
+            <select class="form-control" name="status" #status="ngModel" [(ngModel)]="car.status" required>
+                <option value="true" selected="selected">Sí</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        <button type="submit" class="btn btn-dark" [disabled]="!CarNew.form.valid">Enviar</button>
+      </form>
+</div>

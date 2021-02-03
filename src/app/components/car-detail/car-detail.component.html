@@ -1,0 +1,12 @@
+<div class="col-lg-10 col-md-10 col-xs-12" *ngIf="car">
+    <h1>Modelo: {{car.title}}</h1>
+    <h2>Marca: {{car.marca}}</h2>
+    <p>{{car.description}}</p>
+    <ul>
+        <li><div *ngIf="car.status == 'true'">A la venta: Sí</div><div *ngIf="car.status == 'false'">A la venta: No</div></li>
+        <li>Precio: <strong>{{car.price}} €</strong></li>
+        <li>Caballos: {{car.caballos}}</li>
+        <li>Motor: {{car.motor}}</li>
+        <li>Cambio: {{car.cambio}}</li>
+    </ul>
+</div>

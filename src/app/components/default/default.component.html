@@ -1,0 +1,50 @@
+<h1>{{title}}</h1>
+<owl-carousel *ngIf="carsOffer" [options]="SlideOptions" [carouselClasses]="['owl-theme', 'sliding', 'mt']">
+    <div *ngFor="let offer of carsOffer" class="col-lg-12 col-md-11 col-xs-11">
+        <div class="card">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <h5 class="card-header">{{offer.title}}</h5>
+            <div class="card-body">
+            <p class="card-text">{{offer.description}}</p>
+            <div class="card-text"><p>En descuento</p></div>
+            <p class="card-text">Precio: {{offer.price}} €</p>
+            <div class="container d-flex flex-wrap">
+                <div class="col-lg-4 col-md-6 col-xs-12 mt">
+                    <a [routerLink]="['/coche', offer.id]" class="btn btn-dark col">Ver</a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-6 mt" *ngIf="identity">
+                    <a [routerLink]="['editar-coche', offer.id]" class="btn btn-warning col">Editar</a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12 mt" *ngIf="identity">
+                    <a (click)="deleteCar(offer.id)" class="btn btn-danger col">Borrar</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</owl-carousel>
+<div class="d-flex flex-wrap" *ngIf="cars">
+    <div *ngFor="let car of cars" class="col-lg-4 col-md-6 col-xs-12 mt">
+        <div class="card">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <h5 class="card-header">{{car.title}}</h5>
+            <div class="card-body">
+            <p class="card-text">{{car.description}}</p>
+            <div class="card-text"><p *ngIf="car.status == 'true'">A la venta: Sí</p><p *ngIf="car.status == 'false'">A la venta: No</p></div>
+            <p class="card-text">Precio: {{car.price}} €</p>
+            <div class="container d-flex flex-wrap">
+                <div class="col-lg-4 col-md-6 col-xs-12 mt">
+                    <a [routerLink]="['/coche', car.id]" class="btn btn-dark col">Ver</a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-6 mt" *ngIf="identity">
+                    <a [routerLink]="['editar-coche', car.id]" class="btn btn-warning col">Editar</a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12 mt" *ngIf="identity">
+                    <a (click)="deleteCar(car.id)" class="btn btn-danger col">Borrar</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
